@@ -3,7 +3,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function handler(event, context) {
   try {
-    const { amount, currency } = JSON.parse(event.body); // Получаем данные от фронтенда
+    const { amount, currency } = JSON.parse(event.body);
 
     if (!amount || !currency) {
       return {
@@ -14,7 +14,7 @@ export async function handler(event, context) {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: amount, // сумма в центах, присланная с фронтенда
+      amount: amount,
       currency: currency,
       automatic_payment_methods: { enabled: true },
     });
